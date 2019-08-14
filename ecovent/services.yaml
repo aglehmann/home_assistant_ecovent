@@ -1,0 +1,11 @@
+# Describes the format for available fan services for ecovent fan
+
+ecovent_set_airflow:
+  description: Set the airflow mode of ecovent
+  fields:
+    entity_id:
+      description: Name of the Ecovent fan.
+      example: "fan.twinfresh"
+    airflow:
+      description: Airflow mode of the ecovent fan. Allowed values are: 'Ventilation', 'Heat recovery', 'Air Supply'.
+      example: "Heat recovery"

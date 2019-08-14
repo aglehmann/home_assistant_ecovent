@@ -1,0 +1,8 @@
+{
+  "domain": "ecovent",
+  "name": "ecovent",
+  "documentation": "https://github.com/aglehmann/pyEcovent",
+  "dependencies": [],
+  "codeowners": ["@aglehmann"],
+  "requirements": ["pyEcovent>=0.8.3"]
+}
