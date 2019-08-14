@@ -1,6 +1,6 @@
 # Ecovent
 Home Assistant custom component for heat recovery ventilation units.
-See below sections for details about the ventilation unit.
+See below sections for details about 'supported' ventilation units.
 
 ## Installation
 ### Fan component
@@ -27,7 +27,9 @@ Reload Home Assistant
 
 ### Service
 The ecovent component also adds a service to control airflow modes.
+
 Service name: `fan.ecovent_set_airflow`
+
 This service takes to following input and allowed values:
 ```
 entity_id: "your fan entity id"
@@ -46,6 +48,8 @@ Example service call json:
 "airflow":"ventilation"
 }
 ```
+
+The 'airflow mode' is shown as a state attribute on the fan component and can be used in automations.
 
 ## Tested fans 
 This component has only been tested on two [Twinfresh Expert RW1-50](http://vents-us.com/item/5262/VENTS_TwinFresh_Expert_RW1-50-2_Wi-Fi/) which are configured as master/slave.
