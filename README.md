@@ -1,8 +1,18 @@
 # Ecovent
-Home Assistant custom component for heat recovery fans
+Home Assistant custom component for heat recovery ventilation units.
+See below sections for details about the ventilation unit.
 
 ## Installation
-Copy the the entire folder with contents and place it under 'custom_components'
+Copy the the entire ecovent folder with contents and place it under 'custom_components'.
+It should look something like this:
+```
+├── custom_components
+│   └── ecovent
+│       ├── __init__.py
+│       ├── fan.py
+│       ├── manifest.json
+│       └── services.yaml
+```
 
 Add the following to your `configuration.yaml`
 ```
