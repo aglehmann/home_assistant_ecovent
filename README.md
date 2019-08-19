@@ -19,8 +19,12 @@ It should look something like this:
 Add the following to your `configuration.yaml`
 ```
 ecovent:
-  name: "Basement fan"
-  ip_address: 192.168.10.45
+  devices: 
+    - name: "Basement fan"
+      ip_address: 192.168.10.45
+
+    - name: "Living room fan"
+      ip_address: 192.168.10.23
 ```
 
 Reload Home Assistant
