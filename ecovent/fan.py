@@ -15,15 +15,22 @@ from homeassistant.const import (
 
 import homeassistant.helpers.config_validation as cv
 
-from . import DOMAIN as DATA_ECOVENT
+from . import ECOVENT_DEVICES
 
 import voluptuous as vol
 
 _LOGGER = logging.getLogger(__name__)
 
+
 ATTR_AIRFLOW_VENT = "ventilation"
 ATTR_AIRFLOW_HEATREC = "heat_recovery"
 ATTR_AIRFLOW_AIRSUPP = "air_supply"
+ATTR_FAN_AIRFLOW = "airflow"
+ATTR_FAN_AIRFLOW_LIST = "airflow_list"
+
+ECOVENT_FAN_DEVICES = 'ecovent_fan_devices'
+
+SERVICE_SET_AIRFLOW = "ecovent_set_airflow"
 
 AIRFLOW_MODES = [
     ATTR_AIRFLOW_VENT, ATTR_AIRFLOW_HEATREC, ATTR_AIRFLOW_AIRSUPP
@@ -45,11 +52,6 @@ AIRFLOW_TO_INT = {
     ATTR_AIRFLOW_AIRSUPP: 2,
 }
 
-ATTR_FAN_AIRFLOW = "airflow"
-ATTR_FAN_AIRFLOW_LIST = "airflow_list"
-
-SERVICE_SET_AIRFLOW = "ecovent_set_airflow"
-
 SET_AIRFLOW_SCHEMA = vol.Schema(
     {
         vol.Required(ATTR_ENTITY_ID): cv.entity_ids,
@@ -61,8 +63,13 @@ SET_AIRFLOW_SCHEMA = vol.Schema(
 async def async_setup_platform(
         hass, config, async_add_entities, discovery_info=None):
     """ Set up the Ecovent fan """
-    fan = hass.data.get(DATA_ECOVENT)
-    async_add_entities([EcoventFan(fan)])
+    if ECOVENT_FAN_DEVICES not in hass.data:
+        hass.data[ECOVENT_FAN_DEVICES] = []
+
+    for device in hass.data[ECOVENT_DEVICES]:
+        hass.data[ECOVENT_FAN_DEVICES].append(EcoventFan(device))
+
+    async_add_entities(hass.data[ECOVENT_FAN_DEVICES])
 
     def service_handle(service):
         """Handle the Ecovent fan set airflow service"""
