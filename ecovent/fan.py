@@ -148,13 +148,16 @@ class EcoventFan(FanEntity):
 
     async def async_turn_on(self, speed: str = None) -> None:
         """Turn fan on"""
+        if speed is None:
+            speed = SPEED_LOW
+        await self.async_set_speed(speed)
         self._fan.set_state_on()
 
     async def async_turn_off(self) -> None:
         """Turn fan off"""
         self._fan.set_state_off()
 
-    async def set_speed(self, speed: str) -> None:
+    async def async_set_speed(self, speed: str) -> None:
         """Set the speed of the fan."""
         fan_speed = SPEED_TO_INT[speed]
         self._fan.set_speed(fan_speed)
