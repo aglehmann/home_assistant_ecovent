@@ -7,5 +7,5 @@ ecovent_set_airflow:
       description: Name of the Ecovent fan.
       example: "fan.twinfresh"
     airflow:
-      description: Airflow mode of the ecovent fan. Allowed values are: 'Ventilation', 'Heat recovery', 'Air Supply'.
-      example: "Heat recovery"
+      description: Airflow mode of the ecovent fan. Allowed values are: 'ventialtion', 'heat_recovery', 'air_supply'.
+      example: "heat_recovery"
