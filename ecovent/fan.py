@@ -54,7 +54,7 @@ AIRFLOW_TO_INT = {
 
 SET_AIRFLOW_SCHEMA = vol.Schema(
     {
-        vol.Required(ATTR_ENTITY_ID): cv.entity_ids,
+        vol.Required(ATTR_ENTITY_ID): cv.entity_id,
         vol.Required(ATTR_FAN_AIRFLOW, default=[]):
             vol.All(cv.ensure_list, [vol.In(AIRFLOW_MODES)])
     }
@@ -73,8 +73,14 @@ async def async_setup_platform(
 
     def service_handle(service):
         """Handle the Ecovent fan set airflow service"""
+        entity_id = service.data[ATTR_ENTITY_ID]
+        fan_device = next(
+                (fan for fan in hass.data[ECOVENT_FAN_DEVICES] if fan.entity_id == entity_id),
+            None,
+        )
+
         airflow = AIRFLOW_TO_INT[service.data.get(ATTR_FAN_AIRFLOW)[0]]
-        fan.set_airflow(airflow)
+        fan_device.set_airflow(airflow)
 
     hass.services.async_register(
         DOMAIN, SERVICE_SET_AIRFLOW, service_handle, schema=SET_AIRFLOW_SCHEMA
@@ -161,3 +167,6 @@ class EcoventFan(FanEntity):
         """Set the speed of the fan."""
         fan_speed = SPEED_TO_INT[speed]
         self._fan.set_speed(fan_speed)
+
+    def set_airflow(self, airflow: int) -> None:
+        self._fan.set_airflow(airflow)
