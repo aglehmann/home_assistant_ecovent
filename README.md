@@ -45,7 +45,7 @@ Allowed airflow values are:
 - 'air_supply'
 ```
 
-Example service call json:
+Example service call yaml:
 ```
 entity_id: fan.basement_fan
 airflow: ventilation 
