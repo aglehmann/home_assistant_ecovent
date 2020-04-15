@@ -47,10 +47,8 @@ Allowed airflow values are:
 
 Example service call json:
 ```
-{
-"entity_id":"fan.basement_fan",
-"airflow":"ventilation"
-}
+entity_id: fan.basement_fan
+airflow: ventilation 
 ```
 
 The 'airflow mode' is shown as a state attribute on the fan component and can be used in automations.
