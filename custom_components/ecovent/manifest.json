@@ -1,6 +1,6 @@
 {
   "domain": "ecovent",
-  "name": "ecovent",
+  "name": "EcoVent",
   "documentation": "https://github.com/aglehmann/pyEcovent",
   "dependencies": [],
   "codeowners": ["@aglehmann"],

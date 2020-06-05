@@ -1,12 +1,27 @@
-# Ecovent
+# EcoVent Home Assistant Integration
+
+[![HACS Badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/aglehmann/home_assistant_ecovent)
+
 Home Assistant custom component for heat recovery ventilation units.
 See below sections for details about 'supported' ventilation units.
 
 ## Installation
-### Fan component
-Copy the the entire `ecovent` folder with contents and place it under `custom_components`.
 
+### HACS
+
+The recommended way of installing this component is using the [Home Assistant Community Store](https://hacs.xyz).
+To install the integration follow these steps:
+
+1. Go to the HACS Settings and add the custom repository `aglehmann/home_assistant_ecovent` with category "Integration".
+2. Open the "Integrations" tab and search for "EcoVent".
+3. Follow the instructions on the page to set the integration up.
+
+### Manual installation
+
+Copy the contents of the [custom_components](custom_components) folder to the `custom_components` folder in your Home Assistant config directory.
+You may need to create the `custom_components` folder if this is the first integration you're installing.
 It should look something like this:
+
 ```
 ├── custom_components
 │   └── ecovent
@@ -16,46 +31,13 @@ It should look something like this:
 │       └── services.yaml
 ```
 
-Add the following to your `configuration.yaml`
-```
-ecovent:
-  devices: 
-    - name: "Basement fan"
-      ip_address: 192.168.10.45
+Follow the instructions in the [info.md](info.md) file for the configuration and usage documentation.
 
-    - name: "Living room fan"
-      ip_address: 192.168.10.23
-```
+## Tested fans
 
-Reload Home Assistant
-
-### Service
-The ecovent component also adds a service to control airflow modes.
-
-Service name: `fan.ecovent_set_airflow`
-
-This service takes to following input and allowed values:
-```
-entity_id: "your fan entity id"
-airflow: "airflow mode"
-
-Allowed airflow values are:
-- 'ventilation'
-- 'heat_recovery'
-- 'air_supply'
-```
-
-Example service call yaml:
-```
-entity_id: fan.basement_fan
-airflow: ventilation 
-```
-
-The 'airflow mode' is shown as a state attribute on the fan component and can be used in automations.
-
-## Tested fans 
 This component has only been tested on two [Twinfresh Expert RW1-50](http://vents-us.com/item/5262/VENTS_TwinFresh_Expert_RW1-50-2_Wi-Fi/) which are configured as master/slave.
 
 There are fans from Blauberg and Flexit that are identical and should work, but I have not verified that.
+
 - [Single room ventilator Roomie Dual](https://www.flexit.no/en/products/single_room_ventilator/single_room_ventilator_roomie_dual/single_room_ventilator_roomie_dual/)
 - [Blauberg VENTO Expert A50-1 W](https://blaubergventilatoren.de/en/product/vento-expert-a50-1-w)
