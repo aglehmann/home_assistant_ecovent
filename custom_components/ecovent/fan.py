@@ -3,6 +3,7 @@ import logging
 from homeassistant.components.fan import (
     SUPPORT_SET_SPEED,
     FanEntity,
+    SPEED_OFF,
     SPEED_LOW,
     SPEED_MEDIUM,
     SPEED_HIGH,
@@ -37,7 +38,7 @@ AIRFLOW_MODES = [
 ]
 
 SPEED_LIST = [
-    SPEED_HIGH, SPEED_MEDIUM, SPEED_LOW
+    SPEED_OFF, SPEED_LOW, SPEED_MEDIUM, SPEED_HIGH
 ]
 
 SPEED_TO_INT = {
@@ -155,9 +156,13 @@ class EcoventFan(FanEntity):
     async def async_turn_on(self, speed: str = None) -> None:
         """Turn fan on"""
         if speed is None:
-            speed = SPEED_LOW
-        await self.async_set_speed(speed)
-        self._fan.set_state_on()
+            speed = self._fan.speed    
+
+        if speed == SPEED_OFF:
+            await self.async_turn_off()
+        else:
+            await self.async_set_speed(speed)
+            self._fan.set_state_on()
 
     async def async_turn_off(self) -> None:
         """Turn fan off"""
