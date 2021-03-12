@@ -153,7 +153,13 @@ class EcoventFan(FanEntity):
         self._fan.update()
         self._fan_airflow = self._fan.airflow
 
-    async def async_turn_on(self, speed: str = None) -> None:
+    async def async_turn_on(
+        self,
+        speed: str = None,
+        percentage: str = None,
+        preset_mode: str = None,
+        ) -> None:
+
         """Turn fan on"""
         if speed is None:
             speed = self._fan.speed    
