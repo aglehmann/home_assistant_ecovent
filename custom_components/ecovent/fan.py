@@ -141,7 +141,7 @@ class EcoventFan(FanEntity):
         return None
 
     @property
-    def device_state_attributes(self):
+    def extra_state_attributes(self):
         """Return device specific state attributes."""
         return {
             ATTR_FAN_AIRFLOW: self._fan_airflow,
@@ -162,7 +162,7 @@ class EcoventFan(FanEntity):
 
         """Turn fan on"""
         if speed is None:
-            speed = self._fan.speed    
+            speed = self._fan.speed
 
         if speed == SPEED_OFF:
             await self.async_turn_off()
